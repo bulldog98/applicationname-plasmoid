@@ -2,18 +2,12 @@ About windowtitle-plasmoid
 ---------------------------
 A plasmoid for KDE plasma which displays the title of the focused window.
 
-Useful when you hide the KWin titlebar.
+Useful when you both remove the KWin titlebar and use the menubar plasmoid.
 
 How to install
 --------------
-Open a terminal and go to the 
-
-$ mkdir build
-$ cd build
-$ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
-
-# make install
+See https://github.com/ascarpino/windowtitle-plasmoid/wiki/Installl
 
 Licensing
 ---------
-GPL2
+LGPL
