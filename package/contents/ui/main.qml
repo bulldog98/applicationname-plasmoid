@@ -28,7 +28,7 @@ Item {
     property int minimumWidth: text.paintedWidth
     property int minimumHeight: text.paintedHeight
 
-    property string windowTitle: ''
+    property string applicationName: ''
 
     PlasmaCore.DataSource {
         id: tasksSource
@@ -45,11 +45,11 @@ Item {
 
         onDataChanged: {
             activityId = activitySource.data["Status"]["Current"]
-            windowTitle = activitySource.data[activityId]["Name"]
+            applicationName = activitySource.data[activityId]["Name"]
 
             for ( var i in data ) {
                 if (data[i].active) {
-                    windowTitle = data[i].classClass
+                    applicationName = data[i].classClass
                     break
                 }
             }
@@ -80,7 +80,7 @@ Item {
 
         PlasmaComponents.Label {
             id: text
-            text: windowTitle
+            text: applicationName
             anchors.verticalCenter: frame.verticalCenter
             anchors.horizontalCenter: frame.horizontalCenter
         }
