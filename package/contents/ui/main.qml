@@ -19,8 +19,12 @@
 
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Item {
+    id: main
+
     property int minimumWidth: text.paintedWidth
     property int minimumHeight: text.paintedHeight
 
@@ -48,13 +52,19 @@ Item {
          }
     }
 
-    Row {
-        anchors.verticalCenter: parent.verticalCenter
+    PlasmaWidgets.Frame {
+        id: frame
+        frameShadow: "Sunken"
+        width: text.paintedWidth + 10
+        height: text.paintedHeight
+        anchors.verticalCenter: main.verticalCenter
+        anchors.horizontalCenter: main.horizontalCenter
 
-        Text {
+        PlasmaComponents.Label {
             id: text
             text: windowTitle
-            color: theme.textColor
+            anchors.verticalCenter: frame.verticalCenter
+            anchors.horizontalCenter: frame.horizontalCenter
         }
     }
 }
