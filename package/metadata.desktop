@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Window Title Plasmoid (QML)
-Comment=A A QML plasmoid to display the title of the focused window
+Name=Window Title
+Comment=A QML plasmoid to display the title of the focused window
 Encoding=UTF-8
 Icon=preferences-desktop
 ServiceTypes=Plasma/Applet
