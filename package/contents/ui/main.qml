@@ -31,25 +31,43 @@ Item {
     property string windowTitle: ''
 
     PlasmaCore.DataSource {
-         id: tasksSource
-         engine: "tasks"
-         interval: 0
-         onSourceAdded: {
-            connectSource(source)
-         }
-         Component.onCompleted: {
-             connectedSources = sources
-         }
-         onDataChanged: {
-             windowTitle = 'Desktop'
+        id: tasksSource
+        engine: "tasks"
+        interval: 0
 
-             for ( var i in data ) {
-                 if (data[i].active) {
-                     windowTitle = data[i].classClass
-                     break
-                 }
-             }
-         }
+        onSourceAdded: {
+            connectSource(source)
+        }
+
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+
+        onDataChanged: {
+            activityId = activitySource.data["Status"]["Current"]
+            windowTitle = activitySource.data[activityId]["Name"]
+
+            for ( var i in data ) {
+                if (data[i].active) {
+                    windowTitle = data[i].classClass
+                    break
+                }
+            }
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        interval: 0
+
+        onSourceAdded: {
+            connectSource(source)
+        }
+
+        Component.onCompleted: {
+            connectedSources = sources
+        }
     }
 
     PlasmaWidgets.Frame {
