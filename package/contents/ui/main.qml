@@ -126,11 +126,8 @@ Item {
             font.bold: font_bold
             font.italic: font_italic
             color: font_color
-            anchors.top: frame.top
-            anchors.left: frame.left
-            anchors.leftMargin: 5
-            anchors.right: frame.right
-            anchors.bottom: frame.bottom
+            anchors.verticalCenter: frame.verticalCenter
+            anchors.horizontalCenter: frame.horizontalCenter
         }
     }
 }
