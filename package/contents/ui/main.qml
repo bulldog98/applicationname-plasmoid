@@ -28,7 +28,17 @@ Item {
     property int minimumWidth: text.paintedWidth
     property int minimumHeight: text.paintedHeight
 
-    property string applicationName: ''
+    property bool show_window_title: false
+
+    property string visibleText: ''
+
+    Component.onCompleted: {
+        plasmoid.addEventListener('ConfigChanged', configChanged);
+    }
+
+    function configChanged() {
+        show_window_title = plasmoid.readConfig("showWindowTitle");
+    }
 
     PlasmaCore.DataSource {
         id: tasksSource
@@ -45,11 +55,15 @@ Item {
 
         onDataChanged: {
             activityId = activitySource.data["Status"]["Current"]
-            applicationName = activitySource.data[activityId]["Name"]
+            visibleText = activitySource.data[activityId]["Name"]
 
             for ( var i in data ) {
                 if (data[i].active) {
-                    applicationName = data[i].classClass
+                    if (show_window_title)
+                        visibleText = data[i].name
+                    else
+                        visibleText = data[i].classClass
+
                     break
                 }
             }
@@ -80,7 +94,7 @@ Item {
 
         PlasmaComponents.Label {
             id: text
-            text: applicationName
+            text: visibleText
             anchors.verticalCenter: frame.verticalCenter
             anchors.horizontalCenter: frame.horizontalCenter
         }
