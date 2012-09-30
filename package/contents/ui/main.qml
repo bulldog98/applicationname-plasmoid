@@ -21,19 +21,24 @@ import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     property int minimumWidth: frame.width
     property int minimumHeight: frame.height
 
+    property bool show_application_icon: false
     property bool show_window_title: false
     property bool use_fixed_width: false
+
+    property int fixed_width: text.paintedWidth
 
     Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', configChanged);
     }
 
     function configChanged() {
+        show_application_icon = plasmoid.readConfig("showApplicationIcon");
         show_window_title = plasmoid.readConfig("showWindowTitle");
         use_fixed_width = plasmoid.readConfig("fixedWidth");
 
@@ -65,25 +70,26 @@ Item {
 
         onDataChanged: {
             var activityId = activitySource.data["Status"]["Current"]
-            var applicationName = activitySource.data[activityId]["Name"]
+            text.text = activitySource.data[activityId]["Name"]
+            iconItem.icon = activitySource.data[activityId]["Icon"]
 
             for ( var i in data ) {
                 if (data[i].active) {
+                    iconItem.icon = data[i].icon
                     if (show_window_title)
-                        applicationName = data[i].name
+                        text.text = data[i].name
                     else
-                        applicationName = data[i].classClass
+                        text.text = data[i].classClass
 
                     break
                 }
             }
 
-            text.text = applicationName
             if (use_fixed_width) {
-                frame.width = plasmoid.readConfig("width") + 10
+                fixed_width = plasmoid.readConfig("width")
                 text.elide = Text.ElideRight
             } else {
-                frame.width = text.paintedWidth + 10
+                fixed_width = text.paintedWidth
                 text.elide = Text.ElideNone
             }
         }
@@ -106,18 +112,30 @@ Item {
     PlasmaWidgets.Frame {
         id: frame
         frameShadow: "Sunken"
-        width: text.width + 10
+        width: iconItem.width + fixed_width + 10
         height: text.paintedHeight
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
 
-        PlasmaComponents.Label {
-            id: text
-            elide: Text.ElideNone
-            font.bold: false
-            font.italic: false
-            color: theme.textColor
+        Row {
+            spacing: 5
             anchors.horizontalCenter: frame.horizontalCenter
+
+            QtExtraComponents.QIconItem {
+                id: iconItem
+                height: text.height - (text.height / 4)
+                width: height
+                visible: show_application_icon
+                anchors.verticalCenter: text.verticalCenter
+            }
+
+            PlasmaComponents.Label {
+                id: text
+                elide: Text.ElideNone
+                font.bold: false
+                font.italic: false
+                color: theme.textColor
+            }
         }
     }
 }
