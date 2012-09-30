@@ -1,7 +1,11 @@
 About applicationname-plasmoid
 ---------------------------
-A plasmoid for KDE plasma which shows the application name of the focused window.
-It shows the name of the current activity if there's no window focused.
+A plasmoid for KDE plasma which shows the application name of the focused window (Mac OSX like)
+
+Features:
+* Shows the application name of the focused windows
+* Shows the activity name if no window is focused
+* Optionally, it shows the window title (enable this option in the settings)
 
 Useful when you both remove the KWin titlebar and use the menubar plasmoid.
 
