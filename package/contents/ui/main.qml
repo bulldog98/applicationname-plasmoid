@@ -30,6 +30,11 @@ Item {
 
     property bool show_window_title: false
     property bool use_fixed_width: false
+    property bool font_bold: false
+    property bool font_italic: false
+    property string font_color: theme.textColor
+    property string label_effect: "Sunken"
+
     property int text_width: text.paintedWidth
     property string visibleText: ''
     property int text_elide: Text.ElideNone
@@ -41,6 +46,17 @@ Item {
     function configChanged() {
         show_window_title = plasmoid.readConfig("showWindowTitle");
         use_fixed_width = plasmoid.readConfig("fixedWidth");
+        font_bold = plasmoid.readConfig("bold");
+        font_italic = plasmoid.readConfig("italic");
+        font_color = plasmoid.readConfig("color");
+
+        var selected_effect = plasmoid.readConfig("effect");
+        if (selected_effect == 0)
+            label_effect = "Plain";
+        else if (selected_effect == 1)
+            label_effect = "Raised";
+        else
+            label_effect = "Sunken";
     }
 
     PlasmaCore.DataSource {
@@ -97,7 +113,7 @@ Item {
 
     PlasmaWidgets.Frame {
         id: frame
-        frameShadow: "Sunken"
+        frameShadow: label_effect
         width: text_width + 10
         height: text.paintedHeight
         anchors.verticalCenter: main.verticalCenter
@@ -107,6 +123,9 @@ Item {
             id: text
             text: visibleText
             elide: text_elide
+            font.bold: font_bold
+            font.italic: font_italic
+            color: font_color
             anchors.top: frame.top
             anchors.left: frame.left
             anchors.leftMargin: 5
