@@ -102,8 +102,6 @@ Item {
         height: text.paintedHeight
         anchors.verticalCenter: main.verticalCenter
         anchors.horizontalCenter: main.horizontalCenter
-        anchors.left: main.left
-        anchors.right: main.right
 
         PlasmaComponents.Label {
             id: text
