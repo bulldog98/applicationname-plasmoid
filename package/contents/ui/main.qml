@@ -25,12 +25,14 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 Item {
     id: main
 
-    property int minimumWidth: text.paintedWidth
-    property int minimumHeight: text.paintedHeight
+    property int minimumWidth: frame.width
+    property int minimumHeight: frame.height
 
     property bool show_window_title: false
-
+    property bool use_fixed_width: false
+    property int text_width: text.paintedWidth
     property string visibleText: ''
+    property int text_elide: Text.ElideNone
 
     Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', configChanged);
@@ -38,6 +40,7 @@ Item {
 
     function configChanged() {
         show_window_title = plasmoid.readConfig("showWindowTitle");
+        use_fixed_width = plasmoid.readConfig("fixedWidth");
     }
 
     PlasmaCore.DataSource {
@@ -67,6 +70,14 @@ Item {
                     break
                 }
             }
+
+            if (use_fixed_width) {
+                text_width = plasmoid.readConfig("width");
+                text_elide = Text.ElideRight
+            } else {
+                text_width = text.paintedWidth
+                text_elide = Text.ElideNone
+            }
         }
     }
 
@@ -87,16 +98,22 @@ Item {
     PlasmaWidgets.Frame {
         id: frame
         frameShadow: "Sunken"
-        width: text.paintedWidth + 10
+        width: text_width + 10
         height: text.paintedHeight
         anchors.verticalCenter: main.verticalCenter
         anchors.horizontalCenter: main.horizontalCenter
+        anchors.left: main.left
+        anchors.right: main.right
 
         PlasmaComponents.Label {
             id: text
             text: visibleText
-            anchors.verticalCenter: frame.verticalCenter
-            anchors.horizontalCenter: frame.horizontalCenter
+            elide: text_elide
+            anchors.top: frame.top
+            anchors.left: frame.left
+            anchors.leftMargin: 5
+            anchors.right: frame.right
+            anchors.bottom: frame.bottom
         }
     }
 }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>286</width>
-    <height>73</height>
+    <height>90</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,9 +20,30 @@
       <string/>
      </property>
      <property name="text">
-      <string>Show window title</string>
+      <string>Show the window title</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="kcfg_fixedWidth">
+       <property name="text">
+        <string>Set fixed width</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="kcfg_width">
+       <property name="suffix">
+        <string> px</string>
+       </property>
+       <property name="maximum">
+        <number>999</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <spacer name="verticalSpacer">
