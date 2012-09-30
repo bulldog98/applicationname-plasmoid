@@ -1,6 +1,6 @@
 About applicationname-plasmoid
 ---------------------------
-A plasmoid for KDE plasma which shows the application name of the focused window (Mac OSX like)
+A plasmoid for KDE plasma which shows the application name of the focused window.
 
 Features:
 * Shows the application name of the focused windows
