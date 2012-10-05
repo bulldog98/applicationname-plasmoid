@@ -70,6 +70,10 @@ Item {
 
         onDataChanged: {
             var activityId = activitySource.data["Status"]["Current"]
+
+            if (activityId == null)
+                return
+
             text.text = activitySource.data[activityId]["Name"]
             iconItem.icon = activitySource.data[activityId]["Icon"]
 
@@ -86,10 +90,18 @@ Item {
             }
 
             if (use_fixed_width) {
-                fixed_width = plasmoid.readConfig("width")
+                row.width = plasmoid.readConfig("width")
+                if (show_application_icon)
+                    text.width = row.width - iconItem.width
+                else
+                    text.width = row.width
                 text.elide = Text.ElideRight
             } else {
-                fixed_width = text.paintedWidth
+                if (show_application_icon)
+                    row.width = iconItem.width + text.paintedWidth
+                else
+                    row.width = text.paintedWidth
+                text.width = text.paintedWidth
                 text.elide = Text.ElideNone
             }
         }
@@ -112,12 +124,15 @@ Item {
     PlasmaWidgets.Frame {
         id: frame
         frameShadow: "Sunken"
-        width: iconItem.width + fixed_width + 10
-        height: text.paintedHeight
+        width: row.width + 10
+        height: row.height
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
 
         Row {
+            id: row
+            width: iconItem.width + text.paintedWidth
+            height: text.paintedHeight
             spacing: 5
             anchors.horizontalCenter: frame.horizontalCenter
 
