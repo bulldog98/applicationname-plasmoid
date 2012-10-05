@@ -1,10 +1,11 @@
 [Desktop Entry]
-Name=Application Name
 Comment=A QML plasmoid to display the application name of the focused window
 Encoding=UTF-8
 Icon=preferences-desktop
-ServiceTypes=Plasma/Applet
+Keywords=
+Name=ApplicationName
 Type=Service
+X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Andrea Scarpino
 X-KDE-PluginInfo-Category=Windows and Tasks
 X-KDE-PluginInfo-Depends=
@@ -12,7 +13,9 @@ X-KDE-PluginInfo-Email=andrea@archlinux.org
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Name=org.kde.plasma.applet.applicationname
-X-KDE-PluginInfo-Version=1.1
+X-KDE-PluginInfo-Version=1.7
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
