@@ -138,7 +138,7 @@ Item {
 
             QtExtraComponents.QIconItem {
                 id: iconItem
-                height: text.height - (text.height / 4)
+                height: 3 * (text.height / 4)
                 width: height
                 visible: show_application_icon
                 anchors.verticalCenter: text.verticalCenter

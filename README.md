@@ -1,8 +1,9 @@
 About applicationname-plasmoid
----------------------------
+==============================
 A plasmoid for KDE plasma which shows the application name of the focused window.
 
 Features:
+
 * Shows the application name of the focused windows
 * Shows the activity name if no window is focused
 * Optionally, it shows the window title (enable it in the settings dialog)
@@ -13,10 +14,17 @@ Features:
 
 Very useful when you remove the KWin titlebar.
 
-How to install
---------------
-See https://github.com/scarpin0/applicationname-plasmoid/wiki/Install
+##How to install
+    $ zip applicationname.zip package -r
+    $ plasmapkg -i applicationname.zip
+    $ kbuildsycoc4
 
-Licensing
----------
+or
+
+    $ mkdir build
+    $ cd build
+    $ cmake ../
+    # make install
+
+##Licensing
 LGPL
