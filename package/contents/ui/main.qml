@@ -41,6 +41,7 @@ Item {
         show_window_title = plasmoid.readConfig("showWindowTitle")
         use_fixed_width = plasmoid.readConfig("fixedWidth")
 
+        text.font.family = plasmoid.readConfig("font").toString().split(',')[0]
         text.font.italic = plasmoid.readConfig("italic")
         text.font.underline = plasmoid.readConfig("underline")
         text.color = plasmoid.readConfig("color")
@@ -133,7 +134,6 @@ Item {
 
         PlasmaComponents.Label {
             id: text
-            color: theme.textColor
         }
     }
 }

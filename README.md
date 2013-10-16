@@ -9,7 +9,7 @@ Features:
 * Optionally, it shows the window title (enable it in the settings dialog)
 * Optionally, it shows the application icon (enable it in the settings dialog)
 * A fixed width can be set through the settings dialog
-* Font style (bold/italic/underline) and text color are customizable
+* Font style (bold/italic/underline), family and color are customizable too
 
 ##How to install
     $ zip applicationname.zip package -r
