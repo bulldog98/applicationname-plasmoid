@@ -24,35 +24,37 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
-    property int minimumWidth: frame.width
-    property int minimumHeight: frame.height
+    id: main
+
+    property int minimumWidth: row.implicitWidth
+    property int minimumHeight: row.implicitHeight
 
     property bool show_application_icon: false
     property bool show_window_title: false
     property bool use_fixed_width: false
 
-    property int fixed_width: text.paintedWidth
-
     Component.onCompleted: {
-        plasmoid.addEventListener('ConfigChanged', configChanged);
+        plasmoid.addEventListener("ConfigChanged", configChanged)
     }
 
     function configChanged() {
-        show_application_icon = plasmoid.readConfig("showApplicationIcon");
-        show_window_title = plasmoid.readConfig("showWindowTitle");
-        use_fixed_width = plasmoid.readConfig("fixedWidth");
+        show_application_icon = plasmoid.readConfig("showApplicationIcon")
+        show_window_title = plasmoid.readConfig("showWindowTitle")
+        use_fixed_width = plasmoid.readConfig("fixedWidth")
 
-        text.font.bold = plasmoid.readConfig("bold");
-        text.font.italic = plasmoid.readConfig("italic");
-        text.color = plasmoid.readConfig("color");
+        text.font.bold = plasmoid.readConfig("bold")
+        text.font.italic = plasmoid.readConfig("italic")
+        text.color = plasmoid.readConfig("color")
 
-        var selected_effect = plasmoid.readConfig("effect");
-        if (selected_effect == 0)
-            frame.frameShadow = "Plain";
-        else if (selected_effect == 1)
-            frame.frameShadow = "Raised";
-        else
-            frame.frameShadow = "Sunken";
+        switch (parseInt(plasmoid.readConfig("effect"), 10)) {
+        case 0:
+            frame.frameShadow = "Plain"; break
+        case 1:
+            frame.frameShadow = "Raised"; break
+        case 2:
+        default:
+            frame.frameShadow = "Sunken"
+        }
     }
 
     PlasmaCore.DataSource {
@@ -71,36 +73,36 @@ Item {
         onDataChanged: {
             var activityId = activitySource.data["Status"]["Current"]
 
-            if (activityId == null)
-                return
-
             text.text = activitySource.data[activityId]["Name"]
             iconItem.icon = activitySource.data[activityId]["Icon"]
 
             for ( var i in data ) {
                 if (data[i].active) {
                     iconItem.icon = data[i].icon
-                    if (show_window_title)
+                    if (show_window_title) {
                         text.text = data[i].name
-                    else
+                    } else {
                         text.text = data[i].classClass
+                    }
 
                     break
                 }
             }
 
             if (use_fixed_width) {
-                row.width = plasmoid.readConfig("width")
-                if (show_application_icon)
-                    text.width = row.width - iconItem.width
-                else
-                    text.width = row.width
+                main.width = plasmoid.readConfig("width")
+                if (show_application_icon) {
+                    text.width = main.width - row.spacing - iconItem.width
+                } else {
+                    text.width = main.width
+                }
                 text.elide = Text.ElideRight
             } else {
-                if (show_application_icon)
-                    row.width = iconItem.width + text.paintedWidth
-                else
-                    row.width = text.paintedWidth
+                if (show_application_icon) {
+                    main.width = iconItem.width + row.spacing + text.paintedWidth
+                } else {
+                    main.width = text.paintedWidth
+                }
                 text.width = text.paintedWidth
                 text.elide = Text.ElideNone
             }
@@ -124,21 +126,16 @@ Item {
     PlasmaWidgets.Frame {
         id: frame
         frameShadow: "Sunken"
-        width: row.width + 10
-        height: row.height
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.fill: parent
 
         Row {
             id: row
-            width: iconItem.width + text.paintedWidth
-            height: text.paintedHeight
-            spacing: 5
-            anchors.horizontalCenter: frame.horizontalCenter
+            spacing: 3
+            anchors.centerIn: parent
 
             QtExtraComponents.QIconItem {
                 id: iconItem
-                height: 3 * (text.height / 4)
+                height: text.paintedHeight
                 width: height
                 visible: show_application_icon
                 anchors.verticalCenter: text.verticalCenter
@@ -146,9 +143,6 @@ Item {
 
             PlasmaComponents.Label {
                 id: text
-                elide: Text.ElideNone
-                font.bold: false
-                font.italic: false
                 color: theme.textColor
             }
         }
