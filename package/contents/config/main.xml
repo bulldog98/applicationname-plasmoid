@@ -24,11 +24,11 @@
     <entry name="italic" type="Bool">
       <default>false</default>
     </entry>
+    <entry name="underline" type="Bool">
+      <default>false</default>
+    </entry>
     <entry name="color" type="Color">
       <default>#000000</default>
-    </entry>
-    <entry name="effect" type="Int">
-      <default>2</default>
     </entry>
   </group>
 

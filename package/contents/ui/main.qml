@@ -20,14 +20,13 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     id: main
 
     property int minimumWidth: row.implicitWidth
-    property int minimumHeight: row.implicitHeight
+    property int minimumHeight: text.paintedHeight
 
     property bool show_application_icon: false
     property bool show_window_title: false
@@ -43,22 +42,13 @@ Item {
         use_fixed_width = plasmoid.readConfig("fixedWidth")
 
         text.font.italic = plasmoid.readConfig("italic")
+        text.font.underline = plasmoid.readConfig("underline")
         text.color = plasmoid.readConfig("color")
 
         if (plasmoid.readConfig("bold") == true) {
             text.font.weight = Font.Bold
         } else {
             text.font.weight = Font.Normal
-        }
-
-        switch (parseInt(plasmoid.readConfig("effect"), 10)) {
-        case 0:
-            frame.frameShadow = "Plain"; break
-        case 1:
-            frame.frameShadow = "Raised"; break
-        case 2:
-        default:
-            frame.frameShadow = "Sunken"
         }
     }
 
@@ -128,28 +118,22 @@ Item {
         }
     }
 
-    PlasmaWidgets.Frame {
-        id: frame
-        frameShadow: "Sunken"
-        anchors.fill: parent
+    Row {
+        id: row
+        spacing: 3
+        anchors.centerIn: parent
 
-        Row {
-            id: row
-            spacing: 3
-            anchors.centerIn: parent
+        QtExtraComponents.QIconItem {
+            id: iconItem
+            height: text.paintedHeight
+            width: height
+            visible: show_application_icon
+            anchors.verticalCenter: text.verticalCenter
+        }
 
-            QtExtraComponents.QIconItem {
-                id: iconItem
-                height: text.paintedHeight
-                width: height
-                visible: show_application_icon
-                anchors.verticalCenter: text.verticalCenter
-            }
-
-            PlasmaComponents.Label {
-                id: text
-                color: theme.textColor
-            }
+        PlasmaComponents.Label {
+            id: text
+            color: theme.textColor
         }
     }
 }

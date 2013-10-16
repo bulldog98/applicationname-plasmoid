@@ -1,5 +1,5 @@
 [Desktop Entry]
-Comment=A QML plasmoid to display the application name of the focused window
+Comment=Shows the application name of the focused window
 Encoding=UTF-8
 Icon=preferences-desktop
 Name=Application Name
