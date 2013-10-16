@@ -45,7 +45,7 @@ Item {
         text.font.italic = plasmoid.readConfig("italic")
         text.color = plasmoid.readConfig("color")
 
-        if (plasmoid.readConfig("bold")) {
+        if (plasmoid.readConfig("bold") == true) {
             text.font.weight = Font.Bold
         } else {
             text.font.weight = Font.Normal
