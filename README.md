@@ -8,11 +8,8 @@ Features:
 * Shows the activity name if no window is focused
 * Optionally, it shows the window title (enable it in the settings dialog)
 * Optionally, it shows the application icon (enable it in the settings dialog)
-* A custom width can be set through the settings dialog
-* The font style (bold/italic) and color are customizable
-* The label effect (Plain/Raised/Sunken) is customizable too
-
-Very useful when you remove the KWin titlebar.
+* A fixed width can be set through the settings dialog
+* Font style (bold/italic/underline) and text color are customizable
 
 ##How to install
     $ zip applicationname.zip package -r
