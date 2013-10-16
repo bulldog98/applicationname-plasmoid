@@ -19,10 +19,10 @@
       <default>80</default>
     </entry>
     <entry name="bold" type="Bool">
-      <default>0</default>
+      <default>false</default>
     </entry>
     <entry name="italic" type="Bool">
-      <default>0</default>
+      <default>false</default>
     </entry>
     <entry name="color" type="Color">
       <default>#000000</default>
