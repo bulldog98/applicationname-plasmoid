@@ -49,11 +49,11 @@ Item {
         case 0:
             text.font.weight = Font.Light; break
         case 2:
-            text.font.weight = Font.Normal; break
-        case 3:
             text.font.weight = Font.DemiBold; break
-        case 4:
+        case 3:
             text.font.weight = Font.Bold; break
+        case 4:
+            text.font.weight = Font.Black; break
         case 1:
         default:
             text.font.weight = Font.Normal
