@@ -18,8 +18,8 @@
     <entry name="width" type="Int">
       <default>80</default>
     </entry>
-    <entry name="weight" type="Int">
-      <default>1</default>
+    <entry name="bold" type="Bool">
+      <default>false</default>
     </entry>
     <entry name="italic" type="Bool">
       <default>false</default>

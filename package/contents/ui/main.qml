@@ -45,17 +45,9 @@ Item {
         text.font.italic = plasmoid.readConfig("italic")
         text.color = plasmoid.readConfig("color")
 
-        switch (parseInt(plasmoid.readConfig("weight"), 10)) {
-        case 0:
-            text.font.weight = Font.Light; break
-        case 2:
-            text.font.weight = Font.DemiBold; break
-        case 3:
-            text.font.weight = Font.Bold; break
-        case 4:
-            text.font.weight = Font.Black; break
-        case 1:
-        default:
+        if (plasmoid.readConfig("bold")) {
+            text.font.weight = Font.Bold
+        } else {
             text.font.weight = Font.Normal
         }
 
