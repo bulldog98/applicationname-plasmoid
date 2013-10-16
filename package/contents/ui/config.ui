@@ -76,28 +76,40 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Font style:</string>
+        <string>Font weight:</string>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QComboBox" name="kcfg_weight">
+       <property name="currentIndex">
+        <number>1</number>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="kcfg_bold">
-       <property name="text">
-        <string>Bold</string>
-       </property>
+       <item>
+        <property name="text">
+         <string>Light</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Normal</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DemiBold</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bold</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Black</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
@@ -180,6 +192,9 @@
      </item>
      <item>
       <widget class="QComboBox" name="kcfg_effect">
+       <property name="currentIndex">
+        <number>2</number>
+       </property>
        <item>
         <property name="text">
          <string notr="true">Plain</string>
