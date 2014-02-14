@@ -11,6 +11,8 @@ Features:
 * A fixed width can be set through the settings dialog
 * Font style (bold/italic/underline), family and color are customizable too
 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=andreascarpino&url=https://github.com/andreascarpino/applicationname-plasmoid&title=ApplicationName Plasmoid&language=&tags=github&category=software)
+
 ##How to install
     $ zip applicationname.zip package -r
     $ plasmapkg -i applicationname.zip

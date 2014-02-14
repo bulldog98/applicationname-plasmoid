@@ -1,5 +1,5 @@
 /*
- *   Copyright 2012-2013 Andrea Scarpino <scarpino@kde.org>
+ *   Copyright 2012-2014 Andrea Scarpino <scarpino@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
