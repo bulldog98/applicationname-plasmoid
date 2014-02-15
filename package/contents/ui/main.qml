@@ -31,6 +31,7 @@ Item {
     property bool show_application_icon: false
     property bool show_window_title: false
     property bool use_fixed_width: false
+    property int show_activity_name: 1
 
     Component.onCompleted: {
         plasmoid.addEventListener("ConfigChanged", configChanged)
@@ -40,13 +41,14 @@ Item {
         show_application_icon = plasmoid.readConfig("showApplicationIcon")
         show_window_title = plasmoid.readConfig("showWindowTitle")
         use_fixed_width = plasmoid.readConfig("fixedWidth")
+        show_activity_name = plasmoid.readConfig("showActivityName")
 
         text.font.family = plasmoid.readConfig("font").toString().split(',')[0]
         text.font.italic = plasmoid.readConfig("italic")
         text.font.underline = plasmoid.readConfig("underline")
         text.color = plasmoid.readConfig("color")
 
-        if (plasmoid.readConfig("bold") == true) {
+        if (plasmoid.readConfig("bold") === true) {
             text.font.weight = Font.Bold
         } else {
             text.font.weight = Font.Normal
@@ -67,21 +69,29 @@ Item {
         }
 
         onDataChanged: {
-            var activityId = activitySource.data["Status"]["Current"]
+            text.text = ""
+            iconItem.icon = ""
 
-            text.text = activitySource.data[activityId]["Name"]
-            iconItem.icon = activitySource.data[activityId]["Icon"]
+            if (show_activity_name !== 2) {
+                var activityId = activitySource.data["Status"]["Current"]
 
-            for ( var i in data ) {
-                if (data[i].active) {
-                    iconItem.icon = data[i].icon
-                    if (show_window_title) {
-                        text.text = data[i].name
-                    } else {
-                        text.text = data[i].classClass
-                    }
+                text.text = activitySource.data[activityId]["Name"]
+                iconItem.icon = activitySource.data[activityId]["Icon"]
+            }
 
-                    break
+            if (show_activity_name !== 0) {
+                for ( var i in data ) {
+                    if (data[i].active) {
+                        iconItem.icon = data[i].icon
+
+                        if (show_window_title) {
+                            text.text = data[i].name
+                        } else {
+                            text.text = data[i].classClass
+                        }
+
+                        break
+                     }
                 }
             }
 
