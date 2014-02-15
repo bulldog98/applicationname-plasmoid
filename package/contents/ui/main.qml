@@ -30,8 +30,9 @@ Item {
 
     property bool show_application_icon: false
     property bool show_window_title: false
-    property bool use_fixed_width: false
     property int show_activity_name: 1
+    property bool use_fixed_width: false
+    property bool use_maximum_width: false
 
     Component.onCompleted: {
         plasmoid.addEventListener("ConfigChanged", configChanged)
@@ -40,8 +41,9 @@ Item {
     function configChanged() {
         show_application_icon = plasmoid.readConfig("showApplicationIcon")
         show_window_title = plasmoid.readConfig("showWindowTitle")
-        use_fixed_width = plasmoid.readConfig("fixedWidth")
         show_activity_name = plasmoid.readConfig("showActivityName")
+        use_fixed_width = plasmoid.readConfig("fixedWidth")
+        use_maximum_width = plasmoid.readConfig("maximumWidth")
 
         text.font.family = plasmoid.readConfig("font").toString().split(',')[0]
         text.font.italic = plasmoid.readConfig("italic")
@@ -96,7 +98,7 @@ Item {
             }
 
             if (use_fixed_width) {
-                main.width = plasmoid.readConfig("width")
+                main.width = plasmoid.readConfig("fixedWidthPx")
                 if (show_application_icon) {
                     text.width = main.width - row.spacing - iconItem.width
                 } else {
@@ -109,8 +111,18 @@ Item {
                 } else {
                     main.width = text.paintedWidth
                 }
-                text.width = text.paintedWidth
+
                 text.elide = Text.ElideNone
+
+                var maximumWidth = plasmoid.readConfig("maximumWidthPx")
+                if (use_maximum_width) {
+                    if (main.width > maximumWidth) {
+                        text.width = maximumWidth - row.spacing - iconItem.width
+                        text.elide = Text.ElideRight
+                    }
+                }
+
+                text.width = text.paintedWidth
             }
         }
     }
