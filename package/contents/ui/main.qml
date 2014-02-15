@@ -71,14 +71,22 @@ Item {
         }
 
         onDataChanged: {
+            // Reset texts
             text.text = ""
             iconItem.icon = ""
+            tooltip.mainText = ""
+            tooltip.subText = ""
+            tooltip.image = ""
 
             if (show_activity_name !== 2) {
                 var activityId = activitySource.data["Status"]["Current"]
 
                 text.text = activitySource.data[activityId]["Name"]
                 iconItem.icon = activitySource.data[activityId]["Icon"]
+
+                tooltip.mainText = text.text
+                tooltip.subText = ""
+                tooltip.image = iconItem.icon
             }
 
             if (show_activity_name !== 0) {
@@ -91,6 +99,10 @@ Item {
                         } else {
                             text.text = data[i].classClass
                         }
+
+                        tooltip.mainText = data[i].classClass
+                        tooltip.subText = data[i].name
+                        tooltip.image = iconItem.icon
 
                         break
                      }
@@ -139,6 +151,11 @@ Item {
         Component.onCompleted: {
             connectedSources = sources
         }
+    }
+
+    PlasmaCore.ToolTip {
+        id: tooltip
+        target: main
     }
 
     Row {
