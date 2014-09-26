@@ -34,6 +34,8 @@ Item {
     property bool use_fixed_width: false
     property bool use_maximum_width: false
 
+    property string activeSource: "Status"
+
     Component.onCompleted: {
         plasmoid.addEventListener("ConfigChanged", configChanged)
     }
@@ -153,6 +155,12 @@ Item {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: dataSource
+        engine: "org.kde.activities"
+        connectedSources: [activeSource]
+    }
+
     PlasmaCore.ToolTip {
         id: tooltip
         target: main
@@ -173,6 +181,15 @@ Item {
 
         PlasmaComponents.Label {
             id: text
+        }
+    }
+
+    MouseArea {
+        anchors.fill: row
+        onClicked: {
+            var service = dataSource.serviceForSource(activeSource)
+            var operation = service.operationDescription("toggleActivityManager")
+            service.startOperationCall(operation)
         }
     }
 }

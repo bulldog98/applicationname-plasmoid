@@ -1,8 +1,10 @@
 [Desktop Entry]
 Comment=Shows the application name of the focused window
+Comment[de]=Zeigt den Namen des aktiven Fensters an
 Encoding=UTF-8
 Icon=preferences-desktop
 Name=Application Name
+Name[de]=Programmname
 Type=Service
 X-KDE-PluginInfo-Author=Andrea Scarpino
 X-KDE-PluginInfo-Category=Windows and Tasks
@@ -11,7 +13,7 @@ X-KDE-PluginInfo-Email=scarpino@kde.org
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-Name=applicationname
-X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Version=2.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
